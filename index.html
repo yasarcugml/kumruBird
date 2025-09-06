@@ -72,8 +72,8 @@ Thank you all so much! ♥️✨🫧 -->
   .right{display:flex;gap:8px;align-items:center}
   .btn{
     cursor:pointer;user-select:none;border:none;outline:none;
-    padding:8px 12px;border-radius:999px;font-weight:700;
-    background:rgba(255,255,255,0.08);color:#eaf6ff;
+    padding:18px 32px;border-radius:999px;font-weight:700;
+    background:rgba(255,255,255,0.18);color:#2d3436;font-size:28px;
     transition:transform .08s ease;
   }
   .btn:active{transform:scale(.98)}
@@ -92,6 +92,11 @@ Thank you all so much! ♥️✨🫧 -->
     .chip{font-size:12px;padding:6px 8px}
     .panel{padding:10px 12px}
   }
+  .pause-bottom{position:absolute;left:18px;bottom:18px;z-index:10;}
+  /* CSS for black fonts */
+  .chip, .panel, .small, .controls, .footerNote {
+    color: #111 !important;
+  }
 </style>
 </head>
 <body>
@@ -100,7 +105,7 @@ Thank you all so much! ♥️✨🫧 -->
       <div class="chip" id="scoreLabel">Skor: 0</div>
       <div class="right">
         <div class="chip" id="bestLabel">En İyi: 0</div>
-        <button class="btn" id="pauseBtn" aria-label="Pause">⏸️</button>
+        <!-- Pause button moved to HTML -->
       </div>
     </div>
 
@@ -110,7 +115,7 @@ Thank you all so much! ♥️✨🫧 -->
       <div class="panel" id="startPanel">
         <div style="font-size:18px">Kumru Kuşu</div>
         <div class="small" style="margin-top:6px">Dokun / Tıkla / Boşluk ile uç</div>
-        <div class="controls" style="margin-top:8px">Sembol borularından kaç — her geçişte skor artar.</div>
+        <div class="controls" style="margin-top:8px">Borulara çarpma — Her geçişte skor artar.</div>
         <div class="controls" style="margin-top:10px">Başlamak için herhangi bir yere dokun</div>
       </div>
 
@@ -126,9 +131,12 @@ Thank you all so much! ♥️✨🫧 -->
       </div>
     </div>
 
-   <div class="footerNote"> Tema: kod simgeleri & sembol borular!✨🫧
+    <!-- Pause button placed here, outside .hud -->
+    <button class="btn pause-bottom" id="pauseBtn" aria-label="Pause">⏸️</button>
+
+   <div class="footerNote"> Efe ve babası yaptı!✨🫧
    <br> 
-    Düzenlendi: Artık paralaks, sesler, parçacıklar ve duraklatma var. </div>
+   </div>
   </div>
 
 <script>
@@ -373,7 +381,7 @@ Thank you all so much! ♥️✨🫧 -->
       pausePanel.style.display = 'inline-block';
       startPanel.style.display = 'none';
       gameOverPanel.style.display = 'none';
-      pauseBtn.textContent = '▶️';
+      pauseBtn.textContent = 'Devam et';
       toggleMusic(false);
     } else {
       overlay.style.display = 'none';
@@ -624,9 +632,25 @@ Thank you all so much! ♥️✨🫧 -->
     }
   });
 
-  pauseBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    togglePause();
+  // Pause button logic
+  pauseBtn.addEventListener('click', function(){
+    if (!GAME.running) return;
+    if (!GAME.paused) {
+      GAME.paused = true;
+      overlay.style.display = 'block';
+      pausePanel.style.display = 'inline-block';
+      startPanel.style.display = 'none';
+      gameOverPanel.style.display = 'none';
+      pauseBtn.textContent = 'Devam et';
+      toggleMusic(false);
+    } else {
+      GAME.paused = false;
+      overlay.style.display = 'none';
+      pausePanel.style.display = 'none';
+      pauseBtn.textContent = '⏸️';
+      toggleMusic(true);
+      requestAnimationFrame(loop);
+    }
   });
 
   // ---------- Init ----------
