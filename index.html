@@ -38,8 +38,8 @@ Thank you all so much! ♥️✨🫧 -->
 
 <style>
   :root{
-    --bg-top:#0b2135;
-    --bg-bottom:#041426;
+    --bg-top:#87ceeb;
+    --bg-bottom:#b3e0ff;
     --accent:#ffd166;
     --pipe:#14b8a6;
     --panel-bg: rgba(0,0,0,0.45);
@@ -57,7 +57,7 @@ Thank you all so much! ♥️✨🫧 -->
   canvas{
     width:100%;display:block;border-radius:12px;
     box-shadow:0 8px 30px rgba(2,6,23,0.6);
-    background: linear-gradient(180deg,#0b2135,#041426);
+    background: linear-gradient(180deg,#87ceeb,#b3e0ff);
     touch-action:none;
   }
   .hud{
@@ -67,7 +67,7 @@ Thank you all so much! ♥️✨🫧 -->
   }
   .chip{
     background:var(--hud-bg);backdrop-filter: blur(4px);
-    padding:8px 10px;border-radius:999px;font-size:14px;pointer-events:auto;
+  padding:10px 14px;border-radius:999px;font-size:22px;pointer-events:auto;
   }
   .right{display:flex;gap:8px;align-items:center}
   .btn{
@@ -83,11 +83,11 @@ Thank you all so much! ♥️✨🫧 -->
   }
   .panel{
     display:inline-block;background:var(--panel-bg);
-    padding:14px 18px;border-radius:12px;color:#eaf6ff;font-weight:700;max-width:100%;
+  padding:18px 22px;border-radius:12px;color:#eaf6ff;font-weight:700;max-width:100%;font-size:22px;
   }
-  .small{font-weight:500;font-size:13px;color:#bcd7e6}
-  .controls{margin-top:8px;font-size:13px;color:#cfe9ff}
-  .footerNote{margin-top:10px;font-size:12px;color:#9fb7c9}
+  .small{font-weight:500;font-size:18px;color:#bcd7e6}
+  .controls{margin-top:8px;font-size:18px;color:#cfe9ff}
+  .footerNote{margin-top:10px;font-size:16px;color:#9fb7c9}
   @media (max-width:420px){
     .chip{font-size:12px;padding:6px 8px}
     .panel{padding:10px 12px}
@@ -97,9 +97,9 @@ Thank you all so much! ♥️✨🫧 -->
 <body>
   <div class="wrapper" id="wrapper">
     <div class="hud">
-      <div class="chip" id="scoreLabel">Score: 0</div>
+      <div class="chip" id="scoreLabel">Skor: 0</div>
       <div class="right">
-        <div class="chip" id="bestLabel">Best: 0</div>
+        <div class="chip" id="bestLabel">En İyi: 0</div>
         <button class="btn" id="pauseBtn" aria-label="Pause">⏸️</button>
       </div>
     </div>
@@ -108,27 +108,27 @@ Thank you all so much! ♥️✨🫧 -->
 
     <div class="overlay" id="overlay">
       <div class="panel" id="startPanel">
-        <div style="font-size:18px">Flappy Code</div>
-        <div class="small" style="margin-top:6px">Tap / Click / Press Space to flap</div>
-        <div class="controls" style="margin-top:8px">Avoid symbol gates — score increases each gate passed.</div>
-        <div class="controls" style="margin-top:10px">Tap anywhere to start</div>
+        <div style="font-size:18px">Kumru Kuşu</div>
+        <div class="small" style="margin-top:6px">Dokun / Tıkla / Boşluk ile uç</div>
+        <div class="controls" style="margin-top:8px">Sembol borularından kaç — her geçişte skor artar.</div>
+        <div class="controls" style="margin-top:10px">Başlamak için herhangi bir yere dokun</div>
       </div>
 
       <div class="panel" id="gameOverPanel" style="display:none">
-        <div style="font-size:18px">Game Over</div>
-        <div class="small" id="finalScore" style="margin-top:6px">Score: 0</div>
-        <div class="controls" style="margin-top:8px">Tap to play again</div>
+        <div style="font-size:18px">Oyun Bitti</div>
+        <div class="small" id="finalScore" style="margin-top:6px">Skor: 0</div>
+        <div class="controls" style="margin-top:8px">Tekrar oynamak için dokun</div>
       </div>
 
       <div class="panel" id="pausePanel" style="display:none">
-        <div style="font-size:18px">Paused</div>
-        <div class="small" style="margin-top:6px">Tap or press P to resume</div>
+        <div style="font-size:18px">Duraklatıldı</div>
+        <div class="small" style="margin-top:6px">Devam etmek için dokun veya P'ye bas</div>
       </div>
     </div>
 
-   <div class="footerNote"> Theme: code icon & symbol gates!✨🫧
+   <div class="footerNote"> Tema: kod simgeleri & sembol borular!✨🫧
    <br> 
-    Edited:Now with parallax, sounds, particles & pause. </div>
+    Düzenlendi: Artık paralaks, sesler, parçacıklar ve duraklatma var. </div>
   </div>
 
 <script>
@@ -319,8 +319,8 @@ Thank you all so much! ♥️✨🫧 -->
 
   // ---------- Game flow ----------
   function updateLabels(){
-    scoreLabel.textContent = 'Score: ' + GAME.score;
-    bestLabel.textContent = 'Best: ' + GAME.best;
+    scoreLabel.textContent = 'Skor: ' + GAME.score;
+    bestLabel.textContent = 'En İyi: ' + GAME.best;
   }
 
   function resetGame(){
@@ -355,7 +355,7 @@ Thank you all so much! ♥️✨🫧 -->
       GAME.best = GAME.score;
       safeSet(STORAGE_KEY, String(GAME.best));
     }
-    finalScore.textContent = 'Score: ' + GAME.score;
+    finalScore.textContent = 'Skor: ' + GAME.score;
     overlay.style.display = 'block';
     gameOverPanel.style.display = 'inline-block';
     startPanel.style.display = 'none';
@@ -503,37 +503,24 @@ Thank you all so much! ♥️✨🫧 -->
 
   // ---------- Draw ----------
   function drawBackground(){
-    var g = ctx.createLinearGradient(0,0,0,GAME.height);
-    g.addColorStop(0,'#0b2135'); g.addColorStop(1,'#041426');
-    ctx.fillStyle = g; ctx.fillRect(0,0,GAME.width,GAME.height);
+    // Gökyüzü açık mavi ve bulutlu
+    ctx.fillStyle = '#87ceeb';
+    ctx.fillRect(0,0,GAME.width,GAME.height);
 
-    // Nebulae
-    for (let n of nebulae){
-      ctx.globalAlpha = n.a;
-      ctx.fillStyle = n.color;
-      roundedRect(n.x, n.y, n.w, n.h, 14);
-    }
-    ctx.globalAlpha = 1;
-
-    // Stars
-    for (let s of stars){
-      ctx.globalAlpha = s.a;
-      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle = '#d8f0ff'; ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-    
-    // Twinkling stars
-    for (let t of twinkleStars){
-      ctx.globalAlpha = t.a;
+    // Bulutlar
+    for (let i=0;i<5;i++){
+      let x = (i*90 + Math.sin(Date.now()/1000+i)*30)%GAME.width;
+      let y = 60 + Math.sin(Date.now()/1200+i)*20;
+      ctx.save();
+      ctx.globalAlpha = 0.7;
+      ctx.fillStyle = '#fff';
       ctx.beginPath();
-      ctx.arc(t.x, t.y, t.r, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffffff';
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+      ctx.ellipse(x, y, 38, 18, 0, 0, Math.PI*2);
+      ctx.ellipse(x+20, y+8, 22, 12, 0, 0, Math.PI*2);
+      ctx.ellipse(x-20, y+8, 22, 12, 0, 0, Math.PI*2);
       ctx.fill();
-      ctx.shadowBlur = 0;
+      ctx.restore();
     }
-    ctx.globalAlpha = 1;
   }
 
   function roundedRect(x,y,w,h,r){
@@ -553,24 +540,22 @@ Thank you all so much! ♥️✨🫧 -->
     // Pipes (Mario style)
     for (var i=0;i<PIPES.list.length;i++){
       var p = PIPES.list[i];
+      // Rastgele renkler (rainbow)
+      let colors = ['#e74c3c','#f1c40f','#2ecc40','#3498db','#9b59b6','#fd79a8','#00b894','#fdcb6e'];
+      let color = colors[i % colors.length];
+      let rimColor = '#fff';
       // Top pipe
-      ctx.fillStyle = '#2ecc40'; // Mario pipe green
+      ctx.fillStyle = color;
       ctx.fillRect(p.x, 0, p.width, p.top); // Pipe body
-      ctx.fillStyle = '#27ae60'; // Darker rim
+      ctx.fillStyle = rimColor;
       ctx.fillRect(p.x-4, p.top-16, p.width+8, 16); // Pipe rim
 
       // Bottom pipe
-      ctx.fillStyle = '#2ecc40';
+      ctx.fillStyle = color;
       ctx.fillRect(p.x, GAME.height - p.bottom, p.width, p.bottom); // Pipe body
-      ctx.fillStyle = '#27ae60';
+      ctx.fillStyle = rimColor;
       ctx.fillRect(p.x-4, GAME.height - p.bottom, p.width+8, 16); // Pipe rim
-
-      // symbols
-      ctx.fillStyle = '#001f25';
-      ctx.font = Math.max(12, Math.round(p.width*0.28)) + 'px monospace';
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText(p.symbol, p.x + p.width/2, Math.max(12, p.top/2));
-      ctx.fillText(p.symbol, p.x + p.width/2, GAME.height - Math.max(12, p.bottom/2));
+      // Simgeler kaldırıldı
     }
 
     // Player (draw bird.png)
