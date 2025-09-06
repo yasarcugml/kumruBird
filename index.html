@@ -550,12 +550,20 @@ Thank you all so much! ♥️✨🫧 -->
     ctx.clearRect(0,0,GAME.width,GAME.height);
     drawBackground();
 
-    // Pipes
+    // Pipes (Mario style)
     for (var i=0;i<PIPES.list.length;i++){
       var p = PIPES.list[i];
-      ctx.fillStyle = '#14b8a6';
-      roundedRect(p.x,0,p.width,p.top,8);
-      roundedRect(p.x,GAME.height - p.bottom,p.width,p.bottom,8);
+      // Top pipe
+      ctx.fillStyle = '#2ecc40'; // Mario pipe green
+      ctx.fillRect(p.x, 0, p.width, p.top); // Pipe body
+      ctx.fillStyle = '#27ae60'; // Darker rim
+      ctx.fillRect(p.x-4, p.top-16, p.width+8, 16); // Pipe rim
+
+      // Bottom pipe
+      ctx.fillStyle = '#2ecc40';
+      ctx.fillRect(p.x, GAME.height - p.bottom, p.width, p.bottom); // Pipe body
+      ctx.fillStyle = '#27ae60';
+      ctx.fillRect(p.x-4, GAME.height - p.bottom, p.width+8, 16); // Pipe rim
 
       // symbols
       ctx.fillStyle = '#001f25';
