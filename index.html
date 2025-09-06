@@ -5,37 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Flappy Code Game</title>
 
-<!-- 🫧✨♥️🔹Note: This is the "Flappy Code Game", inspired by the original "Flappy Bird".  
-This game was created by Amrit (me) and edited by Chitranshi.  
-
-🔹First Look:  
-At first, I tried to make this code work smoothly with a clean UI.  
-I designed it that way and, fortunately, it worked even better than I expected.  
-
-🔹Theme:  
-Code icons & symbol gates!✨🫧  
-
-🔹Update 1.0.0.0:  
-In this update, we fixed a small bug that occurred when tapping on the "Tap to Play Again" button.  
-Along with the fix, I also made the game more realistic with the help of Chitrangshi.  
-We added parallax effects, sounds, particles, and a pause feature.  
-
-🔹In Brief:  
-First of all, thanks to her for giving me such a great idea to add this type of background.  
-Then, I tried to make it look more realistic.  
-I hope when you play it, you will feel like the background is a real galaxy.  
-She also added the beep sound and some sparkles that emit from the main code-box body whenever you tap the screen and the character jumps.  
-This makes the game feel more lively.  
-I also attached background music along with the beep sounds.  
-
-She added a pause button too, but I noticed it’s not working properly yet.  
-Hopefully, I’ll fix the error, or she might let me know if she finds it first.  
-
-Thanks once again to her for helping me improve this game,  
-and thanks to all of you for giving so much love and support.  
-Your support motivates me to improve it further and create more projects like this.  
-Thank you all so much! ♥️✨🫧 -->
-
 <style>
   :root{
     --bg-top:#87ceeb;
@@ -92,7 +61,7 @@ Thank you all so much! ♥️✨🫧 -->
     .chip{font-size:12px;padding:6px 8px}
     .panel{padding:10px 12px}
   }
-  .pause-bottom{position:absolute;left:18px;bottom:18px;z-index:10;}
+  .pause-bottom{position:fixed;left:18px;bottom:18px;z-index:9999;pointer-events:auto;}
   /* CSS for black fonts */
   .chip, .panel, .small, .controls, .footerNote {
     color: #111 !important;
@@ -134,7 +103,7 @@ Thank you all so much! ♥️✨🫧 -->
     <!-- Pause button placed here, outside .hud -->
     <button class="btn pause-bottom" id="pauseBtn" aria-label="Pause">⏸️</button>
 
-   <div class="footerNote"> Efe ve babası yaptı!✨🫧
+   <div class="footerNote"> Oyunu Efe ve babası yaptı!✨🫧
    <br> 
    </div>
   </div>
@@ -440,10 +409,11 @@ Thank you all so much! ♥️✨🫧 -->
     PLAYER.y += PLAYER.dy * dt;
     PLAYER.rotation = Math.max(-1.0, Math.min(1.2, PLAYER.dy / 600));
 
-    // Bounds
+    // Bounds - touching ground does not kill, just clamp and stop downward motion
     if (PLAYER.y + PLAYER.size/2 >= GAME.height){
       PLAYER.y = GAME.height - PLAYER.size/2;
-      endGame(); return;
+      PLAYER.dy = Math.min(0, PLAYER.dy);
+      // don't end game on ground contact
     }
     if (PLAYER.y - PLAYER.size/2 <= 0){
       PLAYER.y = PLAYER.size/2;
